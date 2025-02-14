@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta de San Valentín</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            font-family: 'Dancing Script', cursive;
+            overflow: hidden;
+        }
+        .carta {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transform: scale(1);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .carta:hover {
+            transform: scale(1.05);
+        }
+        .mensaje {
+            display: none;
+            margin-top: 20px;
+            font-size: 22px;
+            color: #d63384;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .boton {
+            background: #d63384;
+            color: white;
+            padding: 14px 22px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.3s;
+            margin: 10px;
+        }
+        .boton:hover {
+            background: #b3226a;
+        }
+        .imagen {
+            width: 500px;
+            height: auto;
+            margin-top: 10px;
+            animation: flotar 3s infinite ease-in-out;
+        }
+        @keyframes flotar {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        .corazones {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .corazon {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: red;
+            clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 50% 80%, 20% 100%, 0% 35%);
+            opacity: 0.7;
+            animation: caer 5s linear infinite;
+        }
+        @keyframes caer {
+            0% { transform: translateY(-10px) scale(1); opacity: 1; }
+            100% { transform: translateY(100vh) scale(0.3); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="carta">
+        <h2>💌 Para El Amor De Mi Vida 💌</h2>
+        <p>Haz clic en los botones para descubrir mensajes especiales.</p>
+        <img src="WhatsApp Image 2025-02-13 at 6.54.58 PM.png" alt="Corazón" class="imagen">
+        <br>
+        <button class="boton" onclick="mostrarMensaje('mensaje1')">Abrir Carta 1</button>
+        <button class="boton" onclick="mostrarMensaje('mensaje2')">Abrir Carta 2</button>
+        <button class="boton" onclick="mostrarVentana()">Abrir Sorpresa</button>
+        <p class="mensaje" id="mensaje1">Eres lo Mejor Que Me Pudo Pasar En La Vida. 💖 Gracias por Existir 💖</p>
+        <p class="mensaje" id="mensaje2">Te amo con todo mi corazón. 🌹 Eres mi felicidad. 💕</p>
+        <div class="corazones" id="corazones"></div>
+    </div>
+    
+    <script>
+        function mostrarMensaje(id) {
+            document.getElementById(id).style.display = 'block';
+            reproducirSonido();
+        }
+        function mostrarVentana() {
+            alert(' ¡Eres mi persona favorita en todo el mundo! ¿QUIERES SER MI SAN ❤️VALENTIN?❤️');
+            reproducirSonido();
+        }
+        function reproducirSonido() {
+            let audio = new Audio('https://www.fesliyanstudios.com/play-mp3/6485');
+            audio.play();
+        }
+        function crearCorazones() {
+            const container = document.getElementById('corazones');
+            for (let i = 0; i < 10; i++) {
+                let corazon = document.createElement('div');
+                corazon.classList.add('corazon');
+                corazon.style.left = Math.random() * 100 + 'vw';
+                corazon.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                corazon.style.opacity = Math.random();
+                corazon.style.transform = `scale(${Math.random() * 1.5})`;
+                container.appendChild(corazon);
+                setTimeout(() => corazon.remove(), 5000);
+            }
+        }
+        setInterval(crearCorazones, 1000);
+    </script>
+</body>
+</html>
